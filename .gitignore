@@ -1,0 +1,32 @@
+# ConversionBox Search Audit — .gitignore
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local env / secrets (never commit API keys)
+.env
+.env.local
+*.key
+secrets.js
+
+# Node (if you add a build step later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output (if added later)
+dist/
+build/

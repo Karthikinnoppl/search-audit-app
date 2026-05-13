@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ConversionBox — AI Site Search Audit Engine</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A1628'/%3E%3Ccircle cx='13' cy='13' r='6' stroke='%2300C2A8' stroke-width='2' fill='none'/%3E%3Ccircle cx='13' cy='13' r='2.5' fill='%2300C2A8'/%3E%3Cpath d='M17.5 17.5L23 23' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/docx@9.0.2/build/index.umd.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="10" cy="10" r="6" stroke="#00C2A8" stroke-width="2"/>
+          <path d="M14.5 14.5L19 19" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="10" cy="10" r="2.5" fill="#00C2A8"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">ConversionBox<span class="logo-dot">.</span>ai</div>
+        <div class="logo-tag">AI SEARCH INTELLIGENCE</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="https://www.conversionbox.ai" target="_blank" rel="noopener">Website</a>
+      <a href="mailto:hello@conversionbox.ai">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-badge">Powered by Claude AI</div>
+    <h1>Site Search<br/><span class="gradient-text">Audit Engine</span></h1>
+    <p class="hero-sub">Enter any eCommerce URL. AI analyzes search & discovery gaps and generates a professional Word report — in under 60 seconds.</p>
+  </section>
+
+  <div class="card-wrap">
+    <div class="card">
+
+      <!-- API Key Section -->
+      <!-- URL Input -->
+      <div class="field-group">
+        <div class="field-label"><span>eCommerce Website URL</span></div>
+        <div class="input-icon-wrap">
+          <svg class="input-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 014.9 9.4l-8.3-8.3A6 6 0 0110 4zm0 12a6 6 0 01-4.9-9.4l8.3 8.3A6 6 0 0110 16z" fill="currentColor"/></svg>
+          <input
+            class="field-input mono"
+            id="urlInput"
+            type="url"
+            placeholder="https://yourstore.com"
+            autocomplete="off"
+            onkeydown="if(event.key==='Enter') startAudit()"
+          />
+        </div>
+      </div>
+
+      <!-- Depth Selector -->
+      <div class="field-group">
+        <div class="field-label"><span>Audit Depth</span></div>
+        <div class="depth-grid">
+          <button class="depth-btn active" id="d1" onclick="setDepth(1)">
+            <div class="depth-title">Standard</div>
+            <div class="depth-sub">8 core sections</div>
+          </button>
+          <button class="depth-btn" id="d2" onclick="setDepth(2)">
+            <div class="depth-title">Deep</div>
+            <div class="depth-sub">+ Competitive analysis</div>
+          </button>
+          <button class="depth-btn" id="d3" onclick="setDepth(3)">
+            <div class="depth-title">Full</div>
+            <div class="depth-sub">+ CB Proposal</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Analyze Button -->
+      <button class="btn-analyze" id="analyzeBtn" onclick="startAudit()">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L17 17" stroke-linecap="round"/></svg>
+        Analyze & Generate Report
+      </button>
+
+      <!-- Progress Area -->
+      <div class="progress-area" id="progressArea" style="display:none">
+        <div class="progress-header">
+          <span class="progress-label" id="progressLabel">Initializing...</span>
+          <span class="progress-pct" id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="log-box" id="logBox" role="log" aria-live="polite"></div>
+      </div>
+
+      <!-- Error Box -->
+      <div class="error-box" id="errorBox" style="display:none" role="alert"></div>
+
+      <!-- Result Box -->
+      <div class="result-box" id="resultBox" style="display:none">
+        <div class="result-header">
+          <div>
+            <div class="result-title" id="resultTitle">Audit Complete</div>
+            <div class="result-sub" id="resultSub">Report ready for download</div>
+          </div>
+          <div class="result-badge">✓ Done</div>
+        </div>
+
+        <div class="score-grid" id="scoreGrid"></div>
+
+        <button class="btn-download" id="dlBtn" onclick="triggerDownload()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download Word Report (.docx)
+        </button>
+        <p class="dl-hint">Fully formatted — branded, tables, scoring, all sections ready to share</p>
+      </div>
+
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-strip">
+      <div class="info-card">
+        <div class="info-icon">📊</div>
+        <div class="info-title">10-Area Scorecard</div>
+        <div class="info-body">Search relevancy, NLP, filtering, merchandising, zero results, autocomplete, mobile UX, personalization, AI assistant & analytics</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🤖</div>
+        <div class="info-title">AI-Specific Analysis</div>
+        <div class="info-body">Every finding is tailored to the site's industry, platform, and shopper behavior — not generic copy-paste output</div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📄</div>
+        <div class="info-title">Client-Ready Word Doc</div>
+        <div class="info-body">Branded .docx with ConversionBox styling, color-coded tables, revenue impact calculations, and CB feature mapping</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 ConversionBox.ai — AI Search Intelligence &nbsp;·&nbsp; <a href="https://www.conversionbox.ai" target="_blank" rel="noopener">www.conversionbox.ai</a> &nbsp;·&nbsp; <a href="mailto:hello@conversionbox.ai">hello@conversionbox.ai</a></p>
+  </footer>
+</main>
+
+<script src="audit.js"></script>
+<script src="docbuilder.js"></script>
+</body>
+</html>
