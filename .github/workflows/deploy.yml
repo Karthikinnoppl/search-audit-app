@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Inject API key
+        run: sed -i "s|__ANTHROPIC_KEY__|${{ secrets.ANTHROPIC_KEY }}|g" audit.js
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
