@@ -9,7 +9,7 @@ let auditDepth  = 1;
 let auditData   = null;
 let docBuffer   = null;
 let currentDomain = '';
-const ANTHROPIC_KEY = '__ANTHROPIC_KEY__';
+const WORKER_URL = 'https://anthropic-proxy.karthik-4d5.workers.dev';
 
 // ─── UI helpers ──────────────────────────────────────────────────────────────
 function setDepth(d) {
@@ -367,7 +367,6 @@ ${schema}`;
 
 // ─── Main audit orchestrator ──────────────────────────────────────────────────
 async function startAudit() {
-  const apiKey = ANTHROPIC_KEY;
   const url    = document.getElementById('urlInput').value.trim();
 
   if (!url) {
@@ -415,13 +414,10 @@ async function startAudit() {
 
     const prompt = buildPrompt(parsedUrl.href, currentDomain, siteContent);
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch(WORKER_URL, {
       method: 'POST',
       headers: {
-        'Content-Type':      'application/json',
-        'x-api-key':         apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model:      'claude-sonnet-4-6',
