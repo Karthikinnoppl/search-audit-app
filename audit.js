@@ -430,11 +430,15 @@ async function startAudit() {
     });
 
     if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(
-        err.error?.message ||
-        `Anthropic API error ${response.status}: ${response.statusText}`
-      );
+      const errText = await response.text().catch(() => '');
+      let errMsg = `API error ${response.status}`;
+      try {
+        const errJson = JSON.parse(errText);
+        errMsg = errJson.error?.message || errJson.error || errJson.message || errText || errMsg;
+      } catch {
+        if (errText) errMsg = errText;
+      }
+      throw new Error(errMsg);
     }
 
     setProgress(65, 'Processing audit results...');
