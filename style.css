@@ -114,6 +114,7 @@ body {
                     radial-gradient(ellipse at 10% 100%, rgba(0,194,168,0.15) 0%, transparent 60%);
   padding: 72px 32px 80px;
   text-align: center;
+  width: 100%;
 }
 
 .hero-badge {
@@ -159,8 +160,9 @@ h1 {
 
 /* ── Hero inner ─────────────────────────────────── */
 .hero-inner {
-  max-width: 780px;
+  max-width: 860px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* ── Hero URL bar ───────────────────────────────── */
@@ -171,24 +173,26 @@ h1 {
 .hero-url-bar {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.07);
-  border: 1.5px solid rgba(255,255,255,0.18);
-  border-radius: 16px;
-  padding: 8px 8px 8px 18px;
-  gap: 10px;
-  backdrop-filter: blur(8px);
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 18px;
+  padding: 8px 8px 8px 20px;
+  gap: 12px;
+  backdrop-filter: blur(10px);
   transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 
 .hero-url-bar:focus-within {
-  border-color: rgba(255,255,255,0.45);
-  box-shadow: 0 0 0 4px rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.5);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 4px rgba(255,255,255,0.06);
 }
 
 .hero-url-icon {
   width: 20px;
   height: 20px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.35);
   flex-shrink: 0;
 }
 
@@ -198,22 +202,23 @@ h1 {
   border: none;
   outline: none;
   font-family: 'DM Mono', monospace;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--white);
   min-width: 0;
+  padding: 6px 0;
 }
 
-.hero-url-input::placeholder { color: rgba(255,255,255,0.3); }
+.hero-url-input::placeholder { color: rgba(255,255,255,0.28); }
 
 .hero-analyze-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
+  gap: 9px;
+  padding: 14px 32px;
   background: linear-gradient(135deg, var(--blue) 0%, #1244C4 100%);
   color: var(--white);
   border: none;
-  border-radius: 11px;
+  border-radius: 12px;
   font-family: 'Syne', sans-serif;
   font-weight: 700;
   font-size: 15px;
@@ -221,19 +226,25 @@ h1 {
   transition: all 0.2s;
   white-space: nowrap;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(26,86,219,0.4);
+  box-shadow: 0 4px 20px rgba(26,86,219,0.5);
+  letter-spacing: 0.2px;
 }
 
-.hero-analyze-btn svg { width: 18px; height: 18px; }
+.hero-analyze-btn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
 
 .hero-analyze-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(26,86,219,0.5);
+  box-shadow: 0 8px 28px rgba(26,86,219,0.6);
 }
 
 .hero-analyze-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none !important;
 }
 
 /* ── Hero depth row ─────────────────────────────── */
