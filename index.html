@@ -17,7 +17,7 @@
   <div class="nav-inner">
     <div class="logo">
       <div class="logo-mark">
-        <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 22 22" fill="none">
           <circle cx="10" cy="10" r="6" stroke="#00C2A8" stroke-width="2"/>
           <path d="M14.5 14.5L19 19" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
           <circle cx="10" cy="10" r="2.5" fill="#00C2A8"/>
@@ -35,85 +35,85 @@
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero-section">
-  <div class="hero-inner">
+<!-- Hero with embedded search -->
+<section class="hero">
+  <div class="hero-content">
     <div class="hero-badge">Powered by Claude AI</div>
-    <h1>Site Search<br/><span class="gradient-text">Audit Engine</span></h1>
-    <p class="hero-sub">Enter any eCommerce URL. AI analyzes search & discovery gaps and generates a professional Word report — in under 60 seconds.</p>
+    <h1>AI Site Search <span class="gradient-text">Audit Engine</span></h1>
+    <p class="hero-sub">Paste any eCommerce URL — get a branded Word audit report in under 60 seconds.</p>
 
-    <!-- Big URL bar in hero -->
-    <div class="hero-input-wrap">
-      <div class="hero-url-bar">
-        <svg class="hero-url-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 014.9 9.4l-8.3-8.3A6 6 0 0110 4zm0 12a6 6 0 01-4.9-9.4l8.3 8.3A6 6 0 0110 16z" fill="currentColor"/></svg>
-        <input
-          class="hero-url-input"
-          id="urlInput"
-          type="url"
-          placeholder="https://yourstore.com"
-          autocomplete="off"
-          onkeydown="if(event.key==='Enter') startAudit()"
-        />
-        <button class="hero-analyze-btn" id="analyzeBtn" onclick="startAudit()">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L17 17" stroke-linecap="round"/></svg>
-          Analyze
-        </button>
-      </div>
-
-      <!-- Depth selector in hero -->
-      <div class="hero-depth-row">
-        <span class="hero-depth-label">Report depth:</span>
-        <button class="hero-depth-btn active" id="d1" onclick="setDepth(1)">Standard</button>
-        <button class="hero-depth-btn" id="d2" onclick="setDepth(2)">Deep + Competitive</button>
-        <button class="hero-depth-btn" id="d3" onclick="setDepth(3)">Full + CB Proposal</button>
-      </div>
+    <!-- Search bar -->
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 20 20" fill="none">
+        <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input
+        id="urlInput"
+        class="search-input"
+        type="url"
+        placeholder="https://yourstore.com"
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') startAudit()"
+      />
+      <button class="search-btn" id="analyzeBtn" onclick="startAudit()">
+        Analyze &amp; Generate Report
+      </button>
     </div>
 
-    <!-- Stats strip -->
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-num">10<span>+</span></div><div class="hero-stat-label">Audit Areas</div></div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat"><div class="hero-stat-num">60<span>s</span></div><div class="hero-stat-label">Avg. Report Time</div></div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat"><div class="hero-stat-num">3<span>×</span></div><div class="hero-stat-label">Report Depths</div></div>
-      <div class="hero-stat-div"></div>
-      <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">AI-Generated</div></div>
+    <!-- Depth pills -->
+    <div class="depth-row">
+      <span class="depth-row-label">Report depth:</span>
+      <button class="dpill active" id="d1" onclick="setDepth(1)">Standard</button>
+      <button class="dpill" id="d2" onclick="setDepth(2)">Deep + Competitive</button>
+      <button class="dpill" id="d3" onclick="setDepth(3)">Full + CB Proposal</button>
     </div>
   </div>
 </section>
 
-<!-- Page Body -->
-<div class="page-body">
+<!-- Stats bar -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><strong>10+</strong> Audit Areas</div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><strong>~60s</strong> Report Time</div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><strong>3</strong> Report Depths</div>
+    <div class="stat-sep"></div>
+    <div class="stat-item"><strong>100%</strong> AI-Generated</div>
+  </div>
+</div>
 
-  <!-- Main Card -->
-  <div class="card">
+<!-- Content area -->
+<div class="content-wrap">
 
-    <!-- Progress Area -->
+  <!-- Left: results panel -->
+  <div class="results-panel">
+
+    <!-- Progress -->
     <div class="progress-area" id="progressArea" style="display:none">
       <div class="progress-header">
-        <span class="progress-label" id="progressLabel">Initializing...</span>
-        <span class="progress-pct" id="progressPct">0%</span>
+        <span id="progressLabel">Initializing...</span>
+        <span id="progressPct">0%</span>
       </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       <div class="log-box" id="logBox" role="log" aria-live="polite"></div>
     </div>
 
-    <!-- Error Box -->
+    <!-- Error -->
     <div class="error-box" id="errorBox" style="display:none" role="alert"></div>
 
-    <!-- Result Box -->
+    <!-- Result -->
     <div class="result-box" id="resultBox" style="display:none">
       <div class="result-header">
         <div>
           <div class="result-title" id="resultTitle">Audit Complete</div>
-          <div class="result-sub" id="resultSub">Report ready for download</div>
+          <div class="result-sub" id="resultSub">Report ready</div>
         </div>
         <div class="result-badge">✓ Done</div>
       </div>
       <div class="score-grid" id="scoreGrid"></div>
-      <button class="btn-download" id="dlBtn" onclick="triggerDownload()">
+      <button class="btn-download" onclick="triggerDownload()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/>
@@ -123,45 +123,53 @@
       </button>
       <p class="dl-hint">Fully formatted — branded, tables, scoring, all sections ready to share</p>
     </div>
+
+    <!-- Placeholder when idle -->
+    <div class="idle-state" id="idleState">
+      <div class="idle-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="22" cy="22" r="14" stroke="#1A56DB" stroke-width="2.5" stroke-dasharray="5 3"/>
+          <path d="M32 32L42 42" stroke="#00C2A8" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="22" cy="22" r="5" fill="#1A56DB" opacity="0.2"/>
+        </svg>
+      </div>
+      <div class="idle-title">Ready to audit</div>
+      <div class="idle-sub">Enter a URL above and click Analyze to generate your report</div>
+    </div>
+
   </div>
 
-  <!-- Sidebar -->
+  <!-- Right: info sidebar -->
   <div class="sidebar">
 
-    <!-- Depth legend -->
-    <div class="depth-legend">
-      <div class="depth-legend-title">Report Depths</div>
-      <div class="depth-legend-item">
-        <span class="dlbadge s1">Standard</span>
-        <div class="depth-legend-text"><strong>8-section audit</strong> — scores, findings, recommendations & CB feature mapping</div>
+    <div class="info-block">
+      <div class="info-block-title">Report Depths</div>
+      <div class="depth-info-item">
+        <span class="di-badge standard">Standard</span>
+        <div class="di-text">8-section audit with scores, findings, recommendations & CB feature mapping</div>
       </div>
-      <div class="depth-legend-item">
-        <span class="dlbadge s2">Deep</span>
-        <div class="depth-legend-text"><strong>+ Competitive analysis</strong> — current tool assessment, feature comparison vs Algolia & CB</div>
+      <div class="depth-info-item">
+        <span class="di-badge deep">Deep</span>
+        <div class="di-text">Everything in Standard + competitive analysis vs current tool & Algolia</div>
       </div>
-      <div class="depth-legend-item">
-        <span class="dlbadge s3">Full</span>
-        <div class="depth-legend-text"><strong>+ CB Proposal</strong> — pricing, AI assistant scenarios, onboarding timeline & full sales deck</div>
+      <div class="depth-info-item">
+        <span class="di-badge full">Full</span>
+        <div class="di-text">Complete CB proposal with pricing, AI scenarios & onboarding timeline</div>
       </div>
     </div>
 
-    <!-- Feature cards -->
-    <div class="side-card">
-      <div class="side-card-icon">📊</div>
-      <div class="side-card-title">10-Area Scorecard</div>
-      <div class="side-card-body">Search relevancy, NLP, filtering, merchandising, zero results, autocomplete, mobile UX, personalization, AI assistant & analytics</div>
-    </div>
-
-    <div class="side-card">
-      <div class="side-card-icon">🤖</div>
-      <div class="side-card-title">AI-Specific Analysis</div>
-      <div class="side-card-body">Every finding is tailored to the site's industry, platform, and shopper behavior — not generic copy-paste output</div>
-    </div>
-
-    <div class="side-card">
-      <div class="side-card-icon">📄</div>
-      <div class="side-card-title">Client-Ready Word Doc</div>
-      <div class="side-card-body">Branded .docx with ConversionBox styling, color-coded tables, revenue impact calculations & CB feature mapping</div>
+    <div class="info-block">
+      <div class="info-block-title">What's Analyzed</div>
+      <div class="feature-list">
+        <div class="feature-item"><span class="fi-dot"></span>Search Relevancy & NLP</div>
+        <div class="feature-item"><span class="fi-dot"></span>Filtering & Facets</div>
+        <div class="feature-item"><span class="fi-dot"></span>Autocomplete & Typeahead</div>
+        <div class="feature-item"><span class="fi-dot"></span>Zero Results Handling</div>
+        <div class="feature-item"><span class="fi-dot"></span>Mobile Search UX</div>
+        <div class="feature-item"><span class="fi-dot"></span>AI Shopping Assistant</div>
+        <div class="feature-item"><span class="fi-dot"></span>Personalization</div>
+        <div class="feature-item"><span class="fi-dot"></span>Search Analytics & A/B</div>
+      </div>
     </div>
 
   </div>
@@ -169,10 +177,22 @@
 
 <!-- Footer -->
 <footer>
-  <p>© 2026 ConversionBox.ai — AI Search Intelligence &nbsp;·&nbsp; <a href="https://www.conversionbox.ai" target="_blank" rel="noopener">www.conversionbox.ai</a> &nbsp;·&nbsp; <a href="mailto:hello@conversionbox.ai">hello@conversionbox.ai</a></p>
+  <p>© 2026 ConversionBox.ai — AI Search Intelligence &nbsp;·&nbsp;
+    <a href="https://www.conversionbox.ai" target="_blank" rel="noopener">www.conversionbox.ai</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:hello@conversionbox.ai">hello@conversionbox.ai</a>
+  </p>
 </footer>
 
 <script src="audit.js"></script>
 <script src="docbuilder.js"></script>
+
+<script>
+  // Hide idle state when audit starts
+  const _origStart = window.startAudit;
+  document.getElementById('analyzeBtn').addEventListener('click', () => {
+    document.getElementById('idleState').style.display = 'none';
+  });
+</script>
 </body>
 </html>
