@@ -37,25 +37,47 @@
 
 <!-- Hero -->
 <section class="hero-section">
-  <div class="hero-badge">Powered by Claude AI</div>
-  <h1>Site Search<br/><span class="gradient-text">Audit Engine</span></h1>
-  <p class="hero-sub">Enter any eCommerce URL. AI analyzes search & discovery gaps and generates a professional Word report — in under 60 seconds.</p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num">10<span>+</span></div>
-      <div class="hero-stat-label">Audit Areas</div>
+  <div class="hero-inner">
+    <div class="hero-badge">Powered by Claude AI</div>
+    <h1>Site Search<br/><span class="gradient-text">Audit Engine</span></h1>
+    <p class="hero-sub">Enter any eCommerce URL. AI analyzes search & discovery gaps and generates a professional Word report — in under 60 seconds.</p>
+
+    <!-- Big URL bar in hero -->
+    <div class="hero-input-wrap">
+      <div class="hero-url-bar">
+        <svg class="hero-url-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 014.9 9.4l-8.3-8.3A6 6 0 0110 4zm0 12a6 6 0 01-4.9-9.4l8.3 8.3A6 6 0 0110 16z" fill="currentColor"/></svg>
+        <input
+          class="hero-url-input"
+          id="urlInput"
+          type="url"
+          placeholder="https://yourstore.com"
+          autocomplete="off"
+          onkeydown="if(event.key==='Enter') startAudit()"
+        />
+        <button class="hero-analyze-btn" id="analyzeBtn" onclick="startAudit()">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L17 17" stroke-linecap="round"/></svg>
+          Analyze
+        </button>
+      </div>
+
+      <!-- Depth selector in hero -->
+      <div class="hero-depth-row">
+        <span class="hero-depth-label">Report depth:</span>
+        <button class="hero-depth-btn active" id="d1" onclick="setDepth(1)">Standard</button>
+        <button class="hero-depth-btn" id="d2" onclick="setDepth(2)">Deep + Competitive</button>
+        <button class="hero-depth-btn" id="d3" onclick="setDepth(3)">Full + CB Proposal</button>
+      </div>
     </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">60<span>s</span></div>
-      <div class="hero-stat-label">Avg. Report Time</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">3<span>×</span></div>
-      <div class="hero-stat-label">Report Depths</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">100<span>%</span></div>
-      <div class="hero-stat-label">AI-Generated</div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">10<span>+</span></div><div class="hero-stat-label">Audit Areas</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-num">60<span>s</span></div><div class="hero-stat-label">Avg. Report Time</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-num">3<span>×</span></div><div class="hero-stat-label">Report Depths</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">AI-Generated</div></div>
     </div>
   </div>
 </section>
@@ -65,49 +87,6 @@
 
   <!-- Main Card -->
   <div class="card">
-    <div class="card-title">Run Your Audit</div>
-    <div class="card-sub">Paste any eCommerce store URL below and choose your report depth</div>
-
-    <!-- URL Input -->
-    <div class="field-group">
-      <div class="field-label"><span>eCommerce Website URL</span></div>
-      <div class="input-icon-wrap">
-        <svg class="input-icon" viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 2a6 6 0 014.9 9.4l-8.3-8.3A6 6 0 0110 4zm0 12a6 6 0 01-4.9-9.4l8.3 8.3A6 6 0 0110 16z" fill="currentColor"/></svg>
-        <input
-          class="field-input"
-          id="urlInput"
-          type="url"
-          placeholder="https://yourstore.com"
-          autocomplete="off"
-          onkeydown="if(event.key==='Enter') startAudit()"
-        />
-      </div>
-    </div>
-
-    <!-- Depth Selector -->
-    <div class="field-group">
-      <div class="field-label"><span>Audit Depth</span></div>
-      <div class="depth-grid">
-        <button class="depth-btn active" id="d1" onclick="setDepth(1)">
-          <div class="depth-title">Standard</div>
-          <div class="depth-sub">8 core sections</div>
-        </button>
-        <button class="depth-btn" id="d2" onclick="setDepth(2)">
-          <div class="depth-title">Deep</div>
-          <div class="depth-sub">+ Competitive analysis</div>
-        </button>
-        <button class="depth-btn" id="d3" onclick="setDepth(3)">
-          <div class="depth-title">Full</div>
-          <div class="depth-sub">+ CB Proposal</div>
-        </button>
-      </div>
-    </div>
-
-    <!-- Analyze Button -->
-    <button class="btn-analyze" id="analyzeBtn" onclick="startAudit()">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L17 17" stroke-linecap="round"/></svg>
-      Analyze &amp; Generate Report
-    </button>
 
     <!-- Progress Area -->
     <div class="progress-area" id="progressArea" style="display:none">

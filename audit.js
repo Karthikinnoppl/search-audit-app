@@ -14,9 +14,10 @@ const ANTHROPIC_KEY = '__ANTHROPIC_KEY__';
 // ─── UI helpers ──────────────────────────────────────────────────────────────
 function setDepth(d) {
   auditDepth = d;
-  [1, 2, 3].forEach(i =>
-    document.getElementById('d' + i).classList.toggle('active', i === d)
-  );
+  [1, 2, 3].forEach(i => {
+    const btn = document.getElementById('d' + i);
+    if (btn) btn.classList.toggle('active', i === d);
+  });
 }
 
 
